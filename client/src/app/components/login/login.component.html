@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row min-vh-100">
+        <div class="login-form col-md-5 p-4 mx-auto my-auto">
+            <h2 class="text-center mb-4">Log in</h2>
+
+            <form action="" class="row g-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="col-md-12">
+                    <label for="email" class="form-label">Email : </label>
+                    <input type="email" name="email" class="form-control" placeholder="Email address"
+                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" formControlName="email" />
+
+                    <div *ngIf="submitted && f['email'].errors">
+                        <span *ngIf="f['email'].errors['required']">Email is required.</span>
+                        <span *ngIf="f['email'].errors['email']">Enter valid email.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="password" class="form-label">Password : </label>
+                    <input type="password" name="password" class="form-control" placeholder="Password"
+                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" formControlName="password" />
+
+                    <div *ngIf="submitted && f['password'].errors">
+                        <span *ngIf="f['password'].errors['required']">Password is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <input type="submit" value="Log in" class="btn btn-primary w-100" />
+                </div>
+
+                <div class="col-md-12 d-flex justify-content-center">
+                    <p class="m-0">Don't have an account ?</p>
+                    <a routerLink="/student/register" class="ps-2">Register as student</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+<div class="container">
+    <div class="row min-vh-100">
+        <div class="register-form col-md-8 p-4 mx-auto my-auto">
+          
+            <h2 class="text-center mb-4">Student registration</h2>
+        
+            <form action="" enctype="multipart/form-data" class="row g-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name :</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter full name" 
+                        [ngClass]="{'is-invalid': submitted && f['name'].errors}" formControlName="name">
+
+                    <div *ngIf="submitted && f['name'].errors">  
+                        <span *ngIf="f['name'].errors['required']">Name is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email :</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email address" 
+                        [ngClass]="{'is-invalid': submitted && f['email'].errors}" formControlName="email">
+
+                    <div *ngIf="submitted && f['email'].errors">  
+                        <span *ngIf="f['email'].errors['required']">Email is required.</span>  
+                        <span *ngIf="f['email'].errors['email']">Enter valid email.</span>  
+                    </div>
+                </div>
+                                
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password :</label>
+                    <input type="password" class="form-control" name="password" placeholder="Enter password" 
+                        [ngClass]="{'is-invalid': submitted && f['password'].errors}" formControlName="password">
+
+                    <div *ngIf="submitted && f['password'].errors">
+                        <span *ngIf="f['password'].errors['required']">Password is required.</span>   
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="conpassword" class="form-label">Confirm password :</label>
+                    <input type="password" class="form-control" name="conpassword" placeholder="Enter confirm password" 
+                        [ngClass]="{'is-invalid': submitted && f['cpassword'].errors}" formControlName="cpassword">
+
+                    <div *ngIf="submitted && f['cpassword'].errors">
+                        <span *ngIf="f['cpassword'].errors['required']">Confirm password is required.</span>   
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="gender" class="form-label">Gender :</label>
+                    <div class="d-flex mt-2" [ngClass]="{'is-invalid': submitted && f['gender'].errors}">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="gender" value="male" formControlName="gender">
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="ms-4 form-check">
+                            <input type="radio" class="form-check-input" name="gender" value="female" formControlName="gender">
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="submitted && f['gender'].errors">  
+                        <span *ngIf="f['gender'].errors['required']">Gender is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone :</label>
+                    <input type="number" class="form-control" name="phone" placeholder="Enter phone number" 
+                        [ngClass]="{'is-invalid': submitted && f['phone'].errors}" formControlName="phone">
+
+                    <div *ngIf="submitted && f['phone'].errors">  
+                        <span *ngIf="f['phone'].errors['required']">Phone Number is required.</span>  
+                        <span *ngIf="f['phone'].errors['pattern']">Enter valid 10 digit phone number.</span>  
+                    </div>
+                </div>
+               
+                <div class="col-md-12">
+                    <label for="address" class="form-label">Address :</label>
+                    <textarea name="address" class="form-control" rows="2" maxlength="100" placeholder="Enter address" 
+                        [ngClass]="{'is-invalid': submitted && f['address'].errors}" formControlName="address">
+                    </textarea>
+
+                    <div *ngIf="submitted && f['address'].errors">  
+                        <span *ngIf="f['address'].errors['required']">Address is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="grno" class="form-label">GR Number :</label>
+                    <input type="number" class="form-control" name="grNumber" placeholder="Enter gr number" 
+                        [ngClass]="{'is-invalid': submitted && f['grNumber'].errors}" formControlName="grNumber">
+
+                    <div *ngIf="submitted && f['grNumber'].errors">  
+                        <span *ngIf="f['grNumber'].errors['required']">GR Number is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="dept" class="form-label">Department :</label>
+                    <select class="form-select" name="department" 
+                        [ngClass]="{'is-invalid': submitted && f['department'].errors}" formControlName="department">
+                        <option value="">Select department</option>
+                        <option value="bca">BCA</option>
+                        <option value="bba">BBA</option>
+                        <option value="bcom">BCOM</option>
+                    </select>
+
+                    <div *ngIf="submitted && f['department'].errors">  
+                        <span *ngIf="f['department'].errors['required']">Department is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="class" class="form-label">Class :</label>
+                    <input type="text" class="form-control" name="class" placeholder="Enter class name" 
+                        [ngClass]="{'is-invalid': submitted && f['class'].errors}" formControlName="class">
+
+                    <div *ngIf="submitted && f['class'].errors">  
+                        <span *ngIf="f['class'].errors['required']">Class is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="image" class="form-label">Profile Image :</label>
+                    <input type="file" class="form-control" name="image" placeholder="Enter class name" 
+                        [ngClass]="{'is-invalid': submitted && f['image'].errors}" formControlName="image"
+                        (change)="onFileChange($event)">
+
+                    <div *ngIf="submitted && f['image'].errors">  
+                        <span *ngIf="f['image'].errors['required']">Profile Image is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 d-flex justify-content-end">
+                    <div class="col-md-8 ps-3 d-flex align-items-center">
+                        <p class="m-0">Already have an account ?</p>
+                        <a routerLink="/login" class="ps-2">Login</a>
+                    </div>
+                    <input type="button" value="Cancel" routerLink="/login" class="btn btn-danger col-md-2 me-3">
+                    <input type="submit" value="Register" class="btn btn-primary col-md-2">
+                </div>
+                
+            </form>
+
+        </div>
+    </div>
+</div>

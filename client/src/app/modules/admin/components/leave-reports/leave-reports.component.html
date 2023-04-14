@@ -1,0 +1,65 @@
+<div class="my-leave p-4">
+    <div class="page-title">
+        <p class="fs-2">{{title}}</p>
+    </div>
+
+    <hr>
+
+    <div class="content col-md-12 mt-4">
+
+        <div class="d-flex justify-content-start">
+            <div class="d-flex col-md-4 align-items-center">
+                <span class="me-3">Show</span>
+        
+                <select class="form-select" style="max-width: 80px;" #items (change)="onItemChange(items.value)">
+                  <option value="5">5</option>
+                  <option value="10" selected>10</option>
+                  <option value="15">50</option>
+                  <option value="20">100</option>
+                </select>
+        
+                <span class="ms-3">Records Per Page</span>
+            </div>
+        </div>
+
+        <div class="main mt-4">
+            <table class="table table-hover table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Student Id</th>
+                        <th>Student Name</th>
+                        <th>Available Leave</th>
+                        <th>Used Leave</th>
+                        <th>Academic Year</th>
+                        <th>Attendance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!leaveReportList.length">
+                        <td colspan="8" class="text-center">No data available to display</td>
+                    </tr>
+
+                    <tr [ngClass]="leave.usedLeave < 0 ? 'table-danger' : ''" *ngFor="let leave of leaveReportList | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage, totalItems: totalItems }; let i = index;">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ leave.user.id }}</td>
+                        <td>{{ leave.user.name | titlecase }}</td>
+                        <td>{{ leave.availableLeave }}</td>
+                        <td>{{ leave.usedLeave }}</td>
+                        <td>{{ leave.academicYear }}</td>
+                        <td>{{ leave.attendancePerc }} %</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination d-flex justify-content-end mt-4">
+                <pagination-controls 
+                    (pageChange)="onPageChange($event)"
+                    currentPage="currentPage" 
+                    itemsPerPage="itemPerPage" 
+                    totalItems="totalItems">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

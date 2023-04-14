@@ -1,0 +1,80 @@
+<div class="my-leave p-4">
+    <div class="page-title">
+        <p class="fs-2">{{title}}</p>
+    </div>
+
+    <hr>
+
+    <div class="content col-md-12 mt-4">
+
+        <div class="d-flex justify-content-between">
+            <div class="d-flex col-md-4 align-items-center">
+                <span class="me-3">Show</span>
+        
+                <select class="form-select" style="max-width: 80px;" #items (change)="onItemChange(items.value)">
+                  <option value="5">5</option>
+                  <option value="10" selected>10</option>
+                  <option value="15">50</option>
+                  <option value="20">100</option>
+                </select>
+        
+                <span class="ms-3">Records Per Page</span>
+            </div>
+
+            <a class="btn btn-primary" routerLink="/admin/add-user">Add User</a>
+        </div>
+
+        <div class="main mt-4">
+            <table class="table table-hover table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>GR Number</th>
+                        <th>Department</th>
+                        <th>Class</th>
+                        <th>Role</th>
+                        <th colspan="2" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!userList.length">
+                        <td colspan="8" class="text-center">No data available to display</td>
+                    </tr>
+
+                    <tr *ngFor="let user of userList | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage, totalItems: totalItems }; let i = index;">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ user.name | titlecase }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.grNumber }}</td>
+                        <td>{{ user.department | uppercase }}</td>
+                        <td>{{ user.class | uppercase }}</td>
+                        <td>{{ user.roles.name | titlecase }}</td>
+                        <td class="text-center">
+                            <a [routerLink]="['/admin/update-user', user.id]">
+                                <i class="fa-solid fa-pen-to-square text-primary" data-toggle="tooltip" title="Edit"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a (click)="deleteUser(user.id)">
+                                <i class="fa-solid fa-trash text-danger" data-toggle="tooltip" title="Delete"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination d-flex justify-content-end mt-4">
+                <pagination-controls 
+                    (pageChange)="onPageChange($event)"
+                    currentPage="currentPage" 
+                    itemsPerPage="itemPerPage" 
+                    totalItems="totalItems">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

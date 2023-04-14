@@ -1,0 +1,61 @@
+<div class="my-leave p-4">
+    <div class="page-title">
+        <p class="fs-2">{{title}}</p>
+    </div>
+
+    <hr>
+
+    <div class="content col-md-12 mt-4">
+
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-primary" routerLink="/student/apply-leave">Apply For Leave</a>
+        </div>
+
+        <div class="main mt-4">
+            <table class="table table-hover table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Reason</th>
+                        <th>Leave Type</th>
+                        <th>Leave From</th>
+                        <th>Leave To</th>
+                        <th class="text-center">Status</th>
+                        <th colspan="2" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!myLeave.length">
+                        <td colspan="8" class="text-center">No data available to display</td>
+                    </tr>
+
+                    <tr *ngFor="let leave of myLeave; let i = index;">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ leave.reason | titlecase }}</td>
+                        <td>{{ leave.leaveType | titlecase }}</td>
+                        <td>{{ leave.startDate | date: 'dd/MM/YYYY' }}</td>
+                        <td>{{ leave.endDate | date: 'dd/MM/YYYY' }}</td>
+                        <td class="d-flex justify-content-center">
+                            <p class="text-white text-center mb-0" style="width: 100px" [ngStyle]="{'background-color': leave.status === 'approved' && 'green' || leave.status === 'rejected' && 'red' || leave.status === 'pending' && 'gray' }">
+                                {{leave.status}}
+                            </p>
+                        </td>
+                        <td class="text-center" [ngClass]="['approved', 'rejected'].includes(leave.status) ? 'd-none' : ''">
+                            <a (click)="updateLeave(leave.id, leave.status)">
+                                <i class="fa-solid fa-pen-to-square text-primary" data-toggle="tooltip" title="Edit"></i>
+                            </a>
+                        </td>
+                        <td class="text-center" [ngClass]="['approved', 'rejected'].includes(leave.status) ? 'd-none' : ''">
+                            <a (click)="deleteLeave(leave.id, leave.status)">
+                                <i class="fa-solid fa-trash text-danger" data-toggle="tooltip" title="Delete"></i>
+                            </a>
+                        </td>
+                        <td colspan="2" class="text-center" *ngIf="['approved', 'rejected'].includes(leave.status)">
+                            No Action
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

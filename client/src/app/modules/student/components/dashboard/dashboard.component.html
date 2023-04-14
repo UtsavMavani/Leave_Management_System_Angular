@@ -1,0 +1,31 @@
+<div class="dashboard p-4">
+    <div class="page-title">
+        <p class="fs-2">{{title}}</p>
+    </div>
+
+    <hr>
+
+    <div class="content mt-4">
+        <div class="main col-md-12 d-flex justify-content-between text-center">
+            <div class="box pending bg-info p-4">
+                <p class="fs-3 m-0">Pending Leave</p>
+                <p class="fs-1 m-0">{{ leaveList.pending }}</p>
+            </div>
+
+            <div class="box approved bg-success p-4">
+                <p class="fs-3 m-0">Approved Leave</p>
+                <p class="fs-1 m-0">{{ leaveList.approved }}</p>
+            </div>
+
+            <div class="box rejected bg-danger p-4">
+                <p class="fs-3 m-0">Rejected Leave</p>
+                <p class="fs-1 m-0">{{ leaveList.rejected }}</p>
+            </div>
+
+            <div class="box total bg-warning p-4">
+                <p class="fs-3 m-0">Total Leave</p>
+                <p class="fs-1 m-0">{{ leaveList.total }}</p>
+            </div>
+        </div>
+    </div>
+</div>

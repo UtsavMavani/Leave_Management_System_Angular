@@ -1,0 +1,11 @@
+.sidebar {
+    min-height: calc(100vh - 68px);
+    position: fixed;
+    top: 68px;
+}
+
+.active-link, .nav-link:hover {
+    border-left: 3px solid white;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}

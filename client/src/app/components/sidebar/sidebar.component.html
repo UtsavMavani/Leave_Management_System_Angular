@@ -1,0 +1,45 @@
+<nav class="sidebar navbar-dark bg-dark py-4 col-md-2">
+    <ul class="navbar-nav col-md-4 w-100">
+        <li class="nav-item">
+            <a class="nav-link py-3" routerLink="{{role}}/dashboard" routerLinkActive="active-link">
+                <i class="fa-solid fa-house-chimney fs-5 ms-4"></i> 
+                <span class="ms-2">Dashboard</span>
+            </a>
+        </li>
+
+        <!-- <li class="nav-item" *ngIf="role === 'student'">
+            <a class="nav-link py-3" routerLink="student/apply-leave" routerLinkActive="active-link">
+                <i class="fa-solid fa-calendar-days fs-5 ms-4"></i> 
+                <span class="ms-2">Apply Leave</span>
+            </a>
+        </li> -->
+
+        <li class="nav-item" *ngIf="role === 'student'">
+            <a class="nav-link py-3" routerLink="student/my-leave" routerLinkActive="active-link">
+                <i class="fa-solid fa-calendar-days fs-5 ms-4"></i> 
+                <span class="ms-2">My Leave</span>
+            </a>
+        </li>
+
+        <li class="nav-item" *ngIf="role === 'faculty' || role === 'hod'">
+            <a class="nav-link py-3" routerLink="faculty/leave-approval" routerLinkActive="active-link">
+                <i class="fa-solid fa-calendar-days fs-5 ms-4"></i> 
+                <span class="ms-2">Leave Approval</span>
+            </a>
+        </li>
+
+        <li class="nav-item" *ngIf="role === 'admin'">
+            <a class="nav-link py-3" routerLink="admin/manage-users" routerLinkActive="active-link">
+                <i class="fa-solid fa-calendar-days fs-5 ms-4"></i> 
+                <span class="ms-2">Manage Users</span>
+            </a>
+        </li>
+
+        <li class="nav-item" *ngIf="role === 'admin'">
+            <a class="nav-link py-3" routerLink="admin/leave-reports" routerLinkActive="active-link">
+                <i class="fa-solid fa-file fs-5 ms-4"></i> 
+                <span class="ms-2">Leave Reports</span>
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,98 @@
+<div class="apply-leave p-4">
+    <div class="page-title">
+        <p class="fs-2">{{ isAddMode ? 'Apply Leave' : 'Update Leave' }}</p>
+    </div>
+
+    <hr>
+
+    <div class="content col-md-8 mt-4">
+
+        <div class="title px-4 py-3">
+            <p class="fs-5 m-0 h6">{{ isAddMode ? 'Apply For Leave' : 'Update Leave' }}</p>
+        </div>
+
+        <div class="main px-4 py-4">
+            <form action="" class="row g-4" [formGroup]="applyLeaveForm" (ngSubmit)="onSubmit()">
+                
+                <div class="col-md-5">
+                    <label for="startDate" class="form-label">Start Date:</label>
+                    <input type="date" class="form-control" name="startDate" 
+                        [ngClass]="{'is-invalid': submitted && f['startDate'].errors}" formControlName="startDate">
+    
+                    <div *ngIf="submitted && f['startDate'].errors">  
+                        <span *ngIf="f['startDate'].errors['required']">Start date is required.</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-2 d-flex justify-content-center">
+                    <p style="padding-top: 38px; margin: 0px;">To</p>
+                </div>
+    
+                <div class="col-md-5">
+                    <label for="endDate" class="form-label">End Date:</label>
+                    <input type="date" class="form-control" name="endDate" 
+                        [ngClass]="{'is-invalid': submitted && f['endDate'].errors}" formControlName="endDate">
+    
+                    <div *ngIf="submitted && f['endDate'].errors">  
+                        <span *ngIf="f['endDate'].errors['required']">End date is required.</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-12">
+                    <label for="reason" class="form-label">Reason :</label>
+                    <textarea name="reason" class="form-control" rows="3" maxlength="100" placeholder="Enter reason" 
+                        [ngClass]="{'is-invalid': submitted && f['reason'].errors}" formControlName="reason">
+                    </textarea>
+    
+                    <div *ngIf="submitted && f['reason'].errors">  
+                        <span *ngIf="f['reason'].errors['required']">Address is required.</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-12 d-flex">
+                    <label for="leaveType" class="form-label">Leave Type :</label>
+                    <div class="ms-4" [ngClass]="{'is-invalid': submitted && f['leaveType'].errors}">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="leaveType" value="full day" formControlName="leaveType">
+                            <label class="form-check-label" for="male">Full day <code>(9AM to 6PM)</code> </label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="leaveType" value="first half" formControlName="leaveType">
+                            <label class="form-check-label" for="female">First Half <code>(9AM to 1PM)</code> </label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="leaveType" value="second half" formControlName="leaveType">
+                            <label class="form-check-label" for="female">Second Half <code>(2AM to 6PM)</code> </label>
+                        </div>
+                    </div>
+    
+                    <div *ngIf="submitted && f['leaveType'].errors">  
+                        <span *ngIf="f['leaveType'].errors['required']">Leave type is required.</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-12">
+                    <label for="requestToId" class="form-label">Request To :</label>
+                    <select class="form-select" name="requestToIdIdId" 
+                        [ngClass]="{'is-invalid': submitted && f['requestToId'].errors}" formControlName="requestToId">
+                        <option value="">Select the Admin, HOD, Faculty</option>
+                        <option value="1">Admin</option>
+                        <option value="2">HOD</option>
+                        <option value="3">Faculty</option>
+                    </select>
+    
+                    <div *ngIf="submitted && f['requestToId'].errors">  
+                        <span *ngIf="f['requestToId'].errors['required']">Department is required.</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-12 d-flex justify-content-end">
+                    <input type="button" value="Cancel" class="btn btn-danger col-md-2 me-3" (click)="onCancelClick()">
+                    <input type="submit" value="{{ isAddMode ? 'Apply' : 'Update' }}" class="btn btn-primary col-md-2">
+                </div>
+                
+            </form>
+        </div>
+        
+    </div>
+</div>

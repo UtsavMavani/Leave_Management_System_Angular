@@ -1,0 +1,159 @@
+<div class="apply-leave p-4">
+    <div class="page-title">
+        <p class="fs-2">{{ isAddMode ? 'Add User' : 'Update User' }}</p>
+    </div>
+
+    <hr>
+
+    <div class="content col-md-8 mt-4">
+
+        <div class="title px-4 py-3">
+            <p class="fs-5 m-0 h6">{{ isAddMode ? 'Add New User' : 'Update User' }}</p>
+        </div>
+
+        <div class="main px-4 py-4">
+            <form action="" class="row g-4" [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+                
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name :</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter full name" 
+                        [ngClass]="{'is-invalid': submitted && f['name'].errors}" formControlName="name">
+
+                    <div *ngIf="submitted && f['name'].errors">  
+                        <span *ngIf="f['name'].errors['required']">Name is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email :</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email address" 
+                        [ngClass]="{'is-invalid': submitted && f['email'].errors}" formControlName="email">
+
+                    <div *ngIf="submitted && f['email'].errors">  
+                        <span *ngIf="f['email'].errors['required']">Email is required.</span>  
+                        <span *ngIf="f['email'].errors['email']">Enter valid email.</span>  
+                    </div>
+                </div>
+                                
+                <div class="col-md-6" *ngIf="this.isAddMode">
+                    <label for="password" class="form-label">Password :</label>
+                    <input type="password" class="form-control" name="password" placeholder="Enter password" 
+                        [ngClass]="{'is-invalid': submitted && f['password'].errors}" formControlName="password">
+
+                    <div *ngIf="submitted && f['password'].errors">
+                        <span *ngIf="f['password'].errors['required']">Password is required.</span>   
+                    </div>
+                </div>
+
+                <div class="col-md-6" *ngIf="this.isAddMode">
+                    <label for="conpassword" class="form-label">Confirm password :</label>
+                    <input type="password" class="form-control" name="conpassword" placeholder="Enter confirm password" 
+                        [ngClass]="{'is-invalid': submitted && f['cpassword'].errors}" formControlName="cpassword">
+
+                    <div *ngIf="submitted && f['cpassword'].errors">
+                        <span *ngIf="f['cpassword'].errors['required']">Confirm password is required.</span>   
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="gender" class="form-label">Gender :</label>
+                    <div class="d-flex mt-2" [ngClass]="{'is-invalid': submitted && f['gender'].errors}">
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="gender" value="male" formControlName="gender">
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="ms-4 form-check">
+                            <input type="radio" class="form-check-input" name="gender" value="female" formControlName="gender">
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="submitted && f['gender'].errors">  
+                        <span *ngIf="f['gender'].errors['required']">Gender is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone :</label>
+                    <input type="number" class="form-control" name="phone" placeholder="Enter phone number" 
+                        [ngClass]="{'is-invalid': submitted && f['phone'].errors}" formControlName="phone">
+
+                    <div *ngIf="submitted && f['phone'].errors">  
+                        <span *ngIf="f['phone'].errors['required']">Phone Number is required.</span>  
+                        <span *ngIf="f['phone'].errors['pattern']">Enter valid 10 digit phone number.</span>  
+                    </div>
+                </div>
+               
+                <div class="col-md-12">
+                    <label for="address" class="form-label">Address :</label>
+                    <textarea name="address" class="form-control" rows="2" maxlength="100" placeholder="Enter address" 
+                        [ngClass]="{'is-invalid': submitted && f['address'].errors}" formControlName="address">
+                    </textarea>
+
+                    <div *ngIf="submitted && f['address'].errors">  
+                        <span *ngIf="f['address'].errors['required']">Address is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="role" class="form-label">Role :</label>
+                    <select class="form-select" name="role" #role 
+                        [ngClass]="{'is-invalid': submitted && f['role'].errors}" formControlName="role"
+                        (change)="onChange(role.value)">
+                        <option value="">Select role</option>
+                        <option value="1">Admin</option>
+                        <option value="2">HOD</option>
+                        <option value="3">Faculty</option>
+                        <option value="4">Student</option>
+                    </select>
+
+                    <div *ngIf="submitted && f['role'].errors">  
+                        <span *ngIf="f['role'].errors['required']">Role is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6" *ngIf="['2', '3', '4'].includes(role.value)">
+                    <label for="dept" class="form-label">Department :</label>
+                    <select class="form-select" name="department" 
+                        [ngClass]="{'is-invalid': submitted && f['department'].errors}" formControlName="department">
+                        <option value="">Select department</option>
+                        <option value="bca">BCA</option>
+                        <option value="bba">BBA</option>
+                        <option value="bcom">BCOM</option>
+                    </select>
+
+                    <div *ngIf="submitted && f['department'].errors">  
+                        <span *ngIf="f['department'].errors['required']">Department is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6" *ngIf="role.value === '4'">
+                    <label for="grno" class="form-label">GR Number :</label>
+                    <input type="number" class="form-control" name="grNumber" placeholder="Enter gr number" 
+                        [ngClass]="{'is-invalid': submitted && f['grNumber'].errors}" formControlName="grNumber">
+
+                    <div *ngIf="submitted && f['grNumber'].errors">  
+                        <span *ngIf="f['grNumber'].errors['required']">GR Number is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6" *ngIf="role.value === '4'">
+                    <label for="class" class="form-label">Class :</label>
+                    <input type="text" class="form-control" name="class" placeholder="Enter class name" 
+                        [ngClass]="{'is-invalid': submitted && f['class'].errors}" formControlName="class">
+
+                    <div *ngIf="submitted && f['class'].errors">  
+                        <span *ngIf="f['class'].errors['required']">Class is required.</span>
+                    </div>
+                </div>
+    
+                <div class="col-md-12 d-flex justify-content-end">
+                    <input type="button" value="Cancel" class="btn btn-danger col-md-2 me-3" (click)="onCancelClick()">
+                    <input type="submit" value="{{ isAddMode ? 'Add' : 'Update' }}" class="btn btn-primary col-md-2">
+                </div>
+                
+            </form>
+        </div>
+        
+    </div>
+</div>

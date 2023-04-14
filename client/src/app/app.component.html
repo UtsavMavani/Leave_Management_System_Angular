@@ -1,0 +1,15 @@
+<div class="container-fluid g-0">
+    <div class="header col-md-12" *ngIf="isComponentShow">
+        <app-header></app-header>
+    </div>
+
+    <div class="main d-flex col-md-12" [ngStyle]="{ 'margin-top': isComponentShow ? '68px' : '0px' }">
+        <div class="sidebar col-md-2" *ngIf="isComponentShow">
+            <app-sidebar></app-sidebar>
+        </div>
+
+        <div class="content" [ngClass]="isComponentShow ? 'col-md-10' : 'col-md-12'">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
